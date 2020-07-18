@@ -1,0 +1,32 @@
+{
+  "name": "back_end",
+  "version": "1.0.0",
+  "description": "Back End for That Food Truck Blog",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bethel-school-of-technology/that-food-truck-blog-backend.git"
+  },
+  "author": "Val Bonilla, Ethan Ferrier, Aubrena Taylor, Mitch McCuen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bethel-school-of-technology/that-food-truck-blog-backend/issues"
+  },
+  "homepage": "https://github.com/bethel-school-of-technology/that-food-truck-blog-backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.24"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
