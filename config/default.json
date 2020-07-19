@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://Admin:T1v3wXwnsS43my8g@thatfoodtruck.dkmsx.mongodb.net/thatFoodTruck?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://Admin:T1v3wXwnsS43my8g@thatfoodtruck.dkmsx.mongodb.net/thatFoodTruck?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }

@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  admin: {
+  user: {
     type: Schema.Types.ObjectId,
-    ref: 'admin',
+    ref: 'user',
   },
   text: {
     type: String,
@@ -14,16 +14,30 @@ const PostSchema = new Schema({
   name: {
     // this is the name of the admin
     type: String,
-    required: true,
+  },
+  avatar: {
+    type: String,
   },
   title: {
     type: String,
     required: true,
   },
-  content: {
-    type: String,
-    required: true,
+  social: {
+    twitter: {
+      type: String,
+    },
+    facebook: {
+      type: String,
+    },
+
+    instagram: {
+      type: String,
+    },
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 
-module.exports = Post = mongoose.model('post', Post);
+module.exports = Post = mongoose.model('post', PostSchema);
