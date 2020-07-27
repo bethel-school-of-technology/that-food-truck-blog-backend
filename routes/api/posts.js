@@ -8,6 +8,7 @@ const auth = require('../../middleware/auth');
 // bring in models
 const Post = require('../../models/Post');
 const User = require('../../models/Users');
+const { models } = require('mongoose');
 
 // @route   POST api/posts
 // @desc    create new blog post
@@ -27,7 +28,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const user = await User.findById(req.user.id).select('-password'); //req.user.id is holding the token .select(-password) exludes the password so it is not returned in the state
+      const user = await User.findById(req.user.id).select('-password');
+      //req.user.id is holding the token .select(-password) exludes the password so it is not returned in the state
 
       const newPost = new Post({
         text: req.body.text,
@@ -81,6 +83,48 @@ router.get('/:id', async (req, res) => {
     res.send(500).send('Server error');
   }
 });
+
+// // @route  put api/posts/:id
+// // @desc   update user's Blog
+// // @access   Private
+// router.put(
+//   '/posts/:id',
+//   [
+//     auth,
+//     [
+//       check('text', 'Text is required').not().isEmpty(),
+//       check('title', 'Title is required').not().isEmpty(),
+//     ],
+//   ],
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     const { title, text, name, user } = req.body;
+//     const postFields = { title, text, name, user };
+
+//     try {
+//       let post = await posts.findOneAndUpdate(
+//         //the filter and the update are what i think the problem is....
+
+//         //filter
+//         { user: req.user.id },
+//         //update
+//         { $set: postFields },
+
+//         //returns doc if there is not a doc it will create one with upsert
+//         { new: true, upsert: true }
+//       );
+
+//       res.json(post);
+//     } catch (err) {
+//       console.error(err.message);
+//       res.send(500).send('Server error');
+//     }
+//   }
+// );
 
 // @route   DELETE api/posts/:id
 // @desc    DELETE  post
