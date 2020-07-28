@@ -84,47 +84,43 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// // @route  put api/posts/:id
-// // @desc   update user's Blog
-// // @access   Private
-// router.put(
-//   '/posts/:id',
-//   [
-//     auth,
-//     [
-//       check('text', 'Text is required').not().isEmpty(),
-//       check('title', 'Title is required').not().isEmpty(),
-//     ],
-//   ],
-//   async (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({ errors: errors.array() });
-//     }
+// @route  put api/posts/:id
+// @desc   update user's Blog
+// @access   Private
+router.put(
+  '/:id',
+  [
+    auth,
+    [
+      check('text', 'Text is required').not().isEmpty(),
+      check('title', 'Title is required').not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-//     const { title, text, name, user } = req.body;
-//     const postFields = { title, text, name, user };
+    const { title, text, name, user } = req.body;
+    const postFields = { title, text, name, user };
 
-//     try {
-//       let post = await posts.findOneAndUpdate(
-//         //the filter and the update are what i think the problem is....
+    try {
+      let post = await Post.findOneAndUpdate(
+        //filter
+        { user: req.user.id },
+        //update
+        { $set: postFields },
+        { new: true, upsert: true }
+      );
 
-//         //filter
-//         { user: req.user.id },
-//         //update
-//         { $set: postFields },
-
-//         //returns doc if there is not a doc it will create one with upsert
-//         { new: true, upsert: true }
-//       );
-
-//       res.json(post);
-//     } catch (err) {
-//       console.error(err.message);
-//       res.send(500).send('Server error');
-//     }
-//   }
-// );
+      res.json(post);
+    } catch (err) {
+      // console.error(err.message);
+      res.send(500).send('Server error');
+    }
+  }
+);
 
 // @route   DELETE api/posts/:id
 // @desc    DELETE  post
