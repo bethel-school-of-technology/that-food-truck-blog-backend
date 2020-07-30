@@ -102,8 +102,8 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, text, name, user } = req.body;
-    const postFields = { title, text, name, user };
+    const { text, title, name, avatar, user } = req.body;
+    const postFields = { text, title, name, avatar, user };
 
     try {
       let post = await Post.findOneAndUpdate(
@@ -111,7 +111,7 @@ router.put(
         { user: req.user.id },
         //update
         { $set: postFields },
-        { new: true, upsert: true }
+        { new: true, upsert: true, returnNewDocument: true }
       );
 
       res.json(post);
