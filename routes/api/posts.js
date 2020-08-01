@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
     if (!post) {
       return res.status(400).json({ msg: 'post not found' });
     }
-
+    res.set('Access-Control-Allow-Origin', '*');
     res.json(post);
   } catch (err) {
     console.error(err.message);
