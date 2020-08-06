@@ -50,11 +50,6 @@ router.post(
 
       //matching password to email
       const isMatch = await bcrypt.compare(password, user.password);
-      //compare takes in plain text password(password) and encrypted(user.password) and make sure they are the same
-      //also it will return a promise
-      //checks to see if not a match will throw errors
-
-      //security tip make sure that the error messages in line 48 === 61. if different will expose what the blackhat can target
       if (!isMatch) {
         return res
           .status(400)
