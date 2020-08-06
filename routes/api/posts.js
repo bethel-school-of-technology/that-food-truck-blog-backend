@@ -29,7 +29,6 @@ router.post(
     }
     try {
       const user = await User.findById(req.user.id).select('-password');
-      //req.user.id is holding the token .select(-password) exludes the password so it is not returned in the state
 
       const newPost = new Post({
         text: req.body.text,
