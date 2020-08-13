@@ -12,7 +12,7 @@ connectDB();
 app.use(express.json({ extended: false }));
 
 //add cors to connect to front end
-app.get(cors());
+app.use(cors());
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
