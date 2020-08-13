@@ -16,8 +16,6 @@ app.get(cors());
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
-    // added methods below
-    'Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE',
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
