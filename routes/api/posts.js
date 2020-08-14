@@ -103,11 +103,11 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { text, title, name, avatar, user } = req.body;
-    const postFields = { text, title, name, avatar, user };
+    const { text, title, name, avatar, user_Id } = req.body;
+    const postFields = { text, title, name, avatar, user_Id };
 
     try {
-      let post = await Post.findOneAndUpdate(
+      const post = await Post.findOneAndUpdate(
         //filter
         { user: req.user.id },
         //update
