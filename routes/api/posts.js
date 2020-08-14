@@ -87,6 +87,7 @@ router.get('/:id', async (req, res) => {
 // @route  put api/posts/:id
 // @desc   update user's Blog
 // @access   Private
+
 router.put(
   '/:id',
   [
@@ -111,7 +112,7 @@ router.put(
         { user: req.user.id },
         //update
         { $set: postFields },
-        { new: true, upsert: true, returnNewDocument: true }
+        { new: true }
       );
 
       res.json(post);
