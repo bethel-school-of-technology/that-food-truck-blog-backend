@@ -109,7 +109,10 @@ router.put(
     try {
       const post = await Post.findOneAndUpdate(
         //filter
-        { user: req.user.id },
+        { post: req.post._id },
+
+        //need to filter by posts _ID
+
         //update
         { $set: postFields },
         { new: true }
