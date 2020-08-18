@@ -109,13 +109,10 @@ router.put(
     try {
       const post = await Post.findOneAndUpdate(
         //filter
-        { post: req.post._id },
-
-        //need to filter by posts _ID
-
+        { post: req.params._id },
         //update
         { $set: postFields },
-        { new: true }
+        { new: true, returnNewDocument: true }
       );
 
       res.json(post);
