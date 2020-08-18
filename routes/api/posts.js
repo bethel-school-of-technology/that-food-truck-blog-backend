@@ -88,6 +88,45 @@ router.get('/:id', async (req, res) => {
 // @desc   update user's Blog
 // @access   Private
 
+// router.put(
+//   '/:id',
+//   [
+//     auth,
+//     [
+//       check('text', 'Text is required').not().isEmpty(),
+//       check('title', 'Title is required').not().isEmpty(),
+//     ],
+//   ],
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     const { text, title, name, avatar, user_Id } = req.body;
+//     const postFields = { text, title, name, avatar, user_Id };
+
+//     try {
+//       const post = await Post.findOneAndUpdate(
+//         //filter
+//         { post: req.params._id },
+//         //update
+//         { $set: postFields },
+//         {
+//           new: true,
+//           returnNewDocument: true,
+//         }
+//       );
+
+//       console.log(post);
+//       res.json(post);
+//     } catch (err) {
+//       // console.error(err.message);
+//       res.send(500).send('Server error');
+//     }
+//   }
+// );
+
 router.put(
   '/:id',
   [
@@ -102,24 +141,21 @@ router.put(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     const { text, title, name, avatar, user_Id } = req.body;
     const postFields = { text, title, name, avatar, user_Id };
 
-    try {
-      const post = await Post.findOneAndUpdate(
-        //filter
-        { post: req.params._id },
-        //update
-        { $set: postFields },
-        { new: true, returnNewDocument: true }
-      );
+    const post = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: postFields,
+      },
+      { new: true }
+    );
 
-      res.json(post);
-    } catch (err) {
-      // console.error(err.message);
-      res.send(500).send('Server error');
-    }
+    if (!post)
+      return res.status(404).send('The Blog with the given ID was not found');
+
+    res.send(post);
   }
 );
 
