@@ -88,10 +88,6 @@ router.get('/:id', async (req, res) => {
 // @desc   update user's Blog
 // @access   Private
 
-// @route  put api/posts/:id
-// @desc   update user's Blog
-// @access   Private
-
 router.put(
   '/:id',
   [
