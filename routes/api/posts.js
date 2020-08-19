@@ -88,6 +88,10 @@ router.get('/:id', async (req, res) => {
 // @desc   update user's Blog
 // @access   Private
 
+// @route  put api/posts/:id
+// @desc   update user's Blog
+// @access   Private
+
 router.put(
   '/:id',
   [
@@ -102,24 +106,21 @@ router.put(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     const { text, title, name, avatar, user_Id } = req.body;
     const postFields = { text, title, name, avatar, user_Id };
 
-    try {
-      const post = await Post.findOneAndUpdate(
-        //filter
-        { user: req.user.id },
-        //update
-        { $set: postFields },
-        { new: true }
-      );
+    const post = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: postFields,
+      },
+      { new: true }
+    );
 
-      res.json(post);
-    } catch (err) {
-      // console.error(err.message);
-      res.send(500).send('Server error');
-    }
+    if (!post)
+      return res.status(404).send('The Blog with the given ID was not found');
+
+    res.send(post);
   }
 );
 
