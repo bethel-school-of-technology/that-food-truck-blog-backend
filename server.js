@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 });
 // IMPORTANT RIGHT NOW OUR APP HAS OPEN BOARDERS WE NEED TO RESTRICT WHO CAN ACCESS THIS WHEN WE MOVE TO PRODUCTION IN L17 THE * MEANS ALL
 
-app.get('/', (req, res) => res.send('API Running'));
+// app.get('/', (req, res) => res.send('API Running'));
 
 //Define Routes
 app.use('/api/users', require('./routes/api/users'));
