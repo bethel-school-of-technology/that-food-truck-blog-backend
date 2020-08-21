@@ -12,7 +12,6 @@ const PostSchema = new Schema({
     required: true,
   },
   name: {
-    // this is the name of the admin
     type: String,
   },
   avatar: {
@@ -21,18 +20,6 @@ const PostSchema = new Schema({
   title: {
     type: String,
     required: true,
-  },
-  social: {
-    twitter: {
-      type: String,
-    },
-    facebook: {
-      type: String,
-    },
-
-    instagram: {
-      type: String,
-    },
   },
   date: {
     type: Date,
